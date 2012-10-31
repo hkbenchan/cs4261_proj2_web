@@ -19,6 +19,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->library('REST_Controller');
 		$this->load->view('welcome_message');
 	}
 }
