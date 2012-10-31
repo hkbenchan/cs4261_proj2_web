@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require(APPPATH.'libraries/REST_Controller.php');
+
 class Welcome extends CI_Controller {
 
 	/**
@@ -19,7 +21,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->library('REST_Controller');
+		//$this->load->library('REST_Controller');
 		$this->load->view('welcome_message');
 	}
 }
