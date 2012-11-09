@@ -27,11 +27,6 @@
 
 // ------------------------------------------------------------------------
 
-if ( ! isset($config['rotten_tomato_key']) )
-{
-	$config['rotten_tomato_key'] = 'hzbubqr3gxev62fg8p3pwts6';
-}
-
 /**
  * Reload
  *
@@ -58,23 +53,21 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			'9' => '',
 		);
 		
+		$rotten_tomato_key = 'hzbubqr3gxev62fg8p3pwts6';
 		
 		if (!is_numeric($item))
 			return false;
 			
 		$item = $rotten_tomato_index[(int)$item];
 		$CI =& get_instance();
-		
-		//$CI
-		echo $config['rotten_tomato_key'];
-		$CI->load->spark(array('curl/1.2.1'));
-		echo "after instance";
+
+		$CI->load->spark('curl/1.2.1');
 		if ( $item == '' )
 			return false;
 		
 		elseif ( $item == 'movie_box')
 		{
-			echo '<pre>'.print_r($CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=16&country=us&apikey=".$config['rotten_tomato_key']),true).'</pre>';
+			echo '<pre>'.print_r($CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=16&country=us&apikey=".$rotten_tomato_key),true).'</pre>';
 			die();
 		}
 		elseif ( $item == 'movie_theaters' )
