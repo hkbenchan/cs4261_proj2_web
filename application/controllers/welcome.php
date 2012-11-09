@@ -25,9 +25,9 @@ class Welcome extends CI_Controller {
 		//$this->load->view('welcome_message');
 		// $this->load->library('curl');
 		// 		echo "loaded";
-		// 		$this->load->helper('fetchinfo');
-		// 		fetch_rotten_tomato(1);
-		$this->load->library('curl');
+		 		$this->load->helper('fetchinfo');
+		 		fetch_rotten_tomato(1);
+		//$this->load->library('curl');
 		echo "done"; die();
 	}
 }
