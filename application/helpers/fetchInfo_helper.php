@@ -27,22 +27,6 @@
 
 // ------------------------------------------------------------------------
 
-if ( ! isset($rotten_tomato_index) )
-{
-	$rotten_tomato_index = array(
-		'0' => '',
-		'1' => 'movie_box',
-		'2' => 'movie_theaters',
-		'3' => 'movie_opening',
-		'4' => 'movie_upcoming',
-		'5' => 'dvd_top_rent',
-		'6' => 'dvd_current',
-		'7' => 'dvd_new',
-		'8' => 'dvd_upcoming',
-		'9' => '',
-	);
-};
-
 if ( ! isset($config['rotten_tomato_key']) )
 {
 	$config['rotten_tomato_key'] = 'hzbubqr3gxev62fg8p3pwts6';
@@ -61,6 +45,20 @@ if ( ! function_exists('fetch_rotten_tomato'))
 {
 	function fetch_rotten_tomato($item = 0)
 	{
+		$rotten_tomato_index = array(
+			'0' => '',
+			'1' => 'movie_box',
+			'2' => 'movie_theaters',
+			'3' => 'movie_opening',
+			'4' => 'movie_upcoming',
+			'5' => 'dvd_top_rent',
+			'6' => 'dvd_current',
+			'7' => 'dvd_new',
+			'8' => 'dvd_upcoming',
+			'9' => '',
+		);
+		
+		
 		if (!is_numeric($item))
 			return false;
 			

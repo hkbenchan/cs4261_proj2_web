@@ -49,7 +49,7 @@ class MY_Loader extends CI_Loader
         {
             define('SPARKPATH', 'sparks/');
         }
-
+		echo "I have been in my_loader.";
         $this->_is_lt_210 = (is_callable(array('CI_Loader', 'ci_autoloader'))
                                || is_callable(array('CI_Loader', '_ci_autoloader')));
 
