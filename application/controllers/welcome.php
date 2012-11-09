@@ -22,7 +22,9 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->load->library('REST_Controller');
-		$this->load->view('welcome_message');
+		//$this->load->view('welcome_message');
+		$this->load->helper('fetchInfo');
+		fetch_rotten_tomato(1);
 	}
 }
 
