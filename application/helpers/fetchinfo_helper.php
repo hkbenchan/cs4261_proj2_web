@@ -41,16 +41,16 @@ if ( ! function_exists('fetch_rotten_tomato'))
 	function fetch_rotten_tomato($item = 0)
 	{
 		$rotten_tomato_index = array(
-			'0' => '',
-			'1' => 'movie_box',
-			'2' => 'movie_theaters',
-			'3' => 'movie_opening',
-			'4' => 'movie_upcoming',
-			'5' => 'dvd_top_rent',
-			'6' => 'dvd_current',
-			'7' => 'dvd_new',
-			'8' => 'dvd_upcoming',
-			'9' => '',
+			0 => '',
+			1 => 'movie_box',
+			2 => 'movie_theaters',
+			3 => 'movie_opening',
+			4 => 'movie_upcoming',
+			5 => 'dvd_top_rent',
+			6 => 'dvd_current',
+			7 => 'dvd_new',
+			8 => 'dvd_upcoming',
+			9 => '',
 		);
 		
 		$rotten_tomato_key = 'hzbubqr3gxev62fg8p3pwts6';
@@ -67,6 +67,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		
 		elseif ( $item == 'movie_box')
 		{
+			echo "In movie_box";
 			echo '<pre>'.print_r($CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=16&country=us&apikey=".$rotten_tomato_key),true).'</pre>';
 			echo $this->curl->error_code;
 			echo $this->curl->error_string;
