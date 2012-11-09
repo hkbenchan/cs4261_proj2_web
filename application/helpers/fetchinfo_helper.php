@@ -67,7 +67,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		
 		//$CI
 		echo $config['rotten_tomato_key'];
-		$CI->load->library(array('curl/1.2.1'));
+		$CI->load->spark(array('curl/1.2.1'));
 		echo "after instance";
 		if ( $item == '' )
 			return false;
