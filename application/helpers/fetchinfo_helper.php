@@ -66,6 +66,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		$CI =& get_instance();
 		
 		//$CI
+		$CI->load->library(array('curl'));
 		
 		if ( $item == '' )
 			return false;
