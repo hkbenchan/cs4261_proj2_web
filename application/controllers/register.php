@@ -23,9 +23,9 @@ class Register extends CI_Controller {
 		require_once(APPPATH. "libraries/facebook/facebook.php");
 
 	  	$fb_config = array();
-	  	$fb_config[‘appId’] = '175913622546611';
-		$fb_config[‘secret’] = '175913622546611';
-		$fb_config[‘fileUpload’] = false; // optional
+	  	$fb_config['appId'] = '175913622546611';
+		$fb_config['secret'] = '175913622546611';
+		$fb_config['fileUpload'] = false; // optional
 
 		$facebook = new Facebook($fb_config);
 		$user_id = $facebook->getUser();
