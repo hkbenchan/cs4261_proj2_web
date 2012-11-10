@@ -45,13 +45,21 @@ class Register extends CI_Controller {
 		        // In this case, we'll get an exception, so we'll
 		        // just ask the user to login again here.
 		        $login_url = $facebook->getLoginUrl(); 
-		        echo 'Please login.' . $e->getType() .' and '. $e->getMessage();
+		        //echo 'Please login.' . $e->getType() .' and '. $e->getMessage();
+				$data = array(
+					'login_url' => $login_url,
+				);
+				$this->load->view('register_message',$data);
 		      }   
 		    } else {
 
 		      // No user, print a link for the user to login
 		      $login_url = $facebook->getLoginUrl();
-		      echo 'Please login.';
+		      //echo 'Please login.';
+				$data = array(
+					'login_url' => $login_url,
+				);
+				$this->load->view('register_message',$data);
 
 		    }
 		
