@@ -8,6 +8,11 @@ class Register extends CI_Controller {
 	 *
 	 */
 
+	public function index_get()
+	{
+		echo "Register page.";
+	}
+
 	public function index_post()
 	{
 		// send me the detail
