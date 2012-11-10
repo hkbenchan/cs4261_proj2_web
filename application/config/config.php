@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= 'http://ec2-54-243-84-10.compute-1.amazonaws.com/cs4261_proj2_web/';
 
 /*
 |--------------------------------------------------------------------------

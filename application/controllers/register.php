@@ -15,7 +15,23 @@ class Register extends CI_Controller {
 
 	public function index_post()
 	{
-		// send me the detail
+		// send me the detail: id, username, password, email, fb_auth
+		$this->load->helper(array('form','security'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('id','','xss_clean');
+		$this->form_validation->set_rules('username','','required|min_length[6]');
+		$this->form_validation->set_ruels('password','','xss_clean');
+		$this->form_validation->set_rules('email','','required|valid_email');
+		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|xss_clean');
+		
+		if ($this->form_validation->run() === FALSE) {
+			$this->response(array('message'=>'Please check the input again.'), 404);
+		} else {
+			//add it into the server
+			$this->response(array('message'=>'added'),200);
+		}
+		
 	}
 	
 	public function fb()

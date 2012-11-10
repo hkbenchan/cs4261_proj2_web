@@ -5,7 +5,7 @@
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<h1>Welcome to MovieUp!</h1>
 	<p>Please login <a href='<?php echo $login_url;?>'>here</a>.</p>
 </div>
 
