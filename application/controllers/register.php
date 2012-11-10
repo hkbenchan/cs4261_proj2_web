@@ -18,7 +18,7 @@ class Register extends CI_Controller {
 		// send me the detail
 	}
 	
-	public function fb_get()
+	public function fb()
 	{
 		$this->load->sparks('fb_ignited/1.2.0');
 		$this->fb_me = $this->fb_ignited->fb_get_me();
