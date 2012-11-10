@@ -20,7 +20,7 @@ class Register extends CI_Controller {
 	
 	public function fb()
 	{
-		$this->load->spark('fb_ignited/1.2.0');
+		$this->load->spark('fb_ignited');
 		$fb_me = $this->fb_ignited->fb_get_me();
 		//  You can then check the status, if it hasn't already redirected.
 		if ($fb_me) {
