@@ -11,10 +11,10 @@
  * fb_auth		is the default authentications, '' is basic authentication
  * fb_upload	tells the SDK whether or not file uploads are enabled on your server.
  */
-$config['fb_appid']		= '';
-$config['fb_secret']	= '';
-$config['fb_canvas']	= '';
-$config['fb_apptype']	= '';
+$config['fb_appid']		= '175913622546611';
+$config['fb_secret']	= '175913622546611';
+$config['fb_canvas']	= 'ustbenchan.no-ip.org';
+$config['fb_apptype']	= 'connect';
 $config['fb_auth']		= '';
 $config['fb_upload']	= false;
 

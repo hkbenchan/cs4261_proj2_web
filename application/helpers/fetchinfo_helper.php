@@ -67,16 +67,16 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		
 		elseif ( $item == 'movie_box')
 		{
-			echo "In movie_box";
-			echo $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json",
+			
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json",
 			array(
 				"limit" => 16,
-				"country" => us,
+				"country" => "us",
 				"apikey" => $rotten_tomato_key,
 			));
-			echo $this->curl->error_code;
-			echo $this->curl->error_string;
-			die();
+			if ($result == false) { return false ;}
+			// store it somewhere on the cache
+
 		}
 		elseif ( $item == 'movie_theaters' )
 		{
