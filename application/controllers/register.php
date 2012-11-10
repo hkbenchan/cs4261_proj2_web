@@ -2,7 +2,7 @@
 
 require(APPPATH.'libraries/REST_Controller.php');
 
-class Register extends CI_Controller {
+class Register extends REST_Controller {
 
 	/**
 	 *
@@ -33,7 +33,7 @@ class Register extends CI_Controller {
 		}
 		
 	}
-	
+	/*
 	public function fb()
 	{
 		require_once(APPPATH. "libraries/facebook/facebook.php");
@@ -87,7 +87,7 @@ class Register extends CI_Controller {
 		// 	} else {
 		// 	        echo "Welcome, Guest! Please login";
 		// 	}
-	}
+	}*/
 	
 	
 	public function fb_post()
