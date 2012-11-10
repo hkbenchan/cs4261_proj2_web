@@ -21,6 +21,7 @@ class Fb_ignited {
 		 * it parses the query strings for the `state` and `code` variables sent to the 
 		 * app so that there won't be constant redirection.
 		 */
+		echo "I'm fb ignited, loaded.";
 		parse_str($_SERVER['QUERY_STRING'], $fb_query_strings);
 		if (isset($fb_query_strings['state'])) $_REQUEST['state'] = $fb_query_strings['state'];
 		if (isset($fb_query_strings['code'])) $_REQUEST['code']  = $fb_query_strings['code']; 
