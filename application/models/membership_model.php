@@ -2,12 +2,13 @@
 
 class Membership_model extends CI_Model {
 	
-	private $table = "user";
+	private $table;
 	
 	function __construct()
     {
         // Call the Model constructor
         parent::__construct();
+		$this->table = "user";
     }
 
 	function register($data) {
