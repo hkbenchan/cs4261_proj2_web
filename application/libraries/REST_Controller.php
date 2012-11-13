@@ -918,6 +918,7 @@ abstract class REST_Controller extends CI_Controller
 	 */
 	protected function _check_login($username = '', $password = NULL)
 	{
+		/* override by check the database record 
 		if (empty($username))
 		{
 			return FALSE;
@@ -933,6 +934,28 @@ abstract class REST_Controller extends CI_Controller
 		// If actually NULL (not empty string) then do not check it
 		if ($password !== NULL AND $valid_logins[$username] != $password)
 		{
+			return FALSE;
+		}
+
+		return TRUE;
+		*/
+		if (empty($username))
+		{
+			return FALSE;
+		}
+
+		if ($password === NULL)
+			return TRUE;
+		
+		$this->load->model('membership_model','membership');
+		$this->load->helper('security');
+		
+		$data = array(
+			'password' => xss_clean($password),
+			'email' => xss_clean($username),
+		);
+		$q = $this->membership->find($data, 'F');
+		if ($q['code'] < 0) {
 			return FALSE;
 		}
 
