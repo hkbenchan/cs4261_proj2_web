@@ -35,17 +35,17 @@ class Register extends REST_Controller {
 			$this->response(array('message'=>'Please check the input again.'), 404);
 		} else {
 			//add it into the server
-			if (xss_clean($POST['fb_auth']) == 'T') {
+			if (xss_clean($_POST['fb_auth']) == 'T') {
 				$data = array(
-					'fb_id' => xss_clean($POST['id']),
-					'username' => xss_clean($POST['username']),
-					'email' => xss_clean($POST['email']),
+					'fb_id' => xss_clean($_POST['id']),
+					'username' => xss_clean($_POST['username']),
+					'email' => xss_clean($_POST['email']),
 				);
 			} else {
 				$data = array(
-					'username' => xss_clean($POST['username']),
-					'password' => xss_clean($POST['password']),
-					'email' => xss_clean($POST['email']),
+					'username' => xss_clean($_POST['username']),
+					'password' => xss_clean($_POST['password']),
+					'email' => xss_clean($_POST['email']),
 				);
 			}
 			$q = $this->membership->register($data);
