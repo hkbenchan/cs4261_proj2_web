@@ -7,13 +7,13 @@ class Login extends REST_Controller {
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
-		$this->early_check();
+		// $this->early_check();
 		$this->load->model('membership_model','membership');
 	}
 	
-	protected function early_check() {
+	protected function early_checks() {
 		// extend to auth users
-		echo "I'm early check.";
+		echo "checking";
 	}
 	
 	public function index_post() {
