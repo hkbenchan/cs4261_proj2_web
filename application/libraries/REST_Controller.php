@@ -1069,9 +1069,10 @@ abstract class REST_Controller extends CI_Controller
 		if ($digest['response'] != $valid_response)
 		{
 			$_SESSION['error_prompted'] = true;
-			header('HTTP/1.0 401 Unauthorized');
-			header('HTTP/1.1 401 Unauthorized');
-			exit;
+			$this->_force_login($uniqid);
+			// header('HTTP/1.0 401 Unauthorized');
+			// 		header('HTTP/1.1 401 Unauthorized');
+			// 		exit;
 		}
 	}
 
