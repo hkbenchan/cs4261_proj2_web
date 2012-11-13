@@ -25,11 +25,11 @@ class Register extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('id','','xss_clean');
+		$this->form_validation->set_rules('fb_id','','xss_clean');
 		$this->form_validation->set_rules('username','','required|min_length[6]|xss_clean');
-		$this->form_validation->set_rules('password','','xss_clean');
+		$this->form_validation->set_rules('password','','required|xss_clean|min_length[6]');
 		$this->form_validation->set_rules('email','','required|valid_email');
-		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|xss_clean');
+		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|max_length[1]|xss_clean');
 		
 		if ($this->form_validation->run() === FALSE) {
 			$this->response(array('message'=>'Please check the input again.'), 404);
@@ -37,8 +37,9 @@ class Register extends REST_Controller {
 			//add it into the server
 			if (xss_clean($_POST['fb_auth']) == 'T') {
 				$data = array(
-					'fb_id' => xss_clean($_POST['id']),
+					'fb_id' => xss_clean($_POST['fb_id']),
 					'username' => xss_clean($_POST['username']),
+					'password' => xss_clean($_POST['password']),
 					'email' => xss_clean($_POST['email']),
 				);
 			} else {
@@ -59,6 +60,7 @@ class Register extends REST_Controller {
 		}
 		
 	}
+	
 	
 	public function member_get()
 	{
@@ -125,12 +127,6 @@ class Register extends REST_Controller {
 		// 	        echo "Welcome, Guest! Please login";
 		// 	}
 	}*/
-	
-	
-	public function fb_post()
-	{
-		// send me the fb auth
-	}
 }
 
 /* End of file register.php */
