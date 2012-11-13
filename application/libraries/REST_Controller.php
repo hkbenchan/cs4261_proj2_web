@@ -1027,8 +1027,9 @@ abstract class REST_Controller extends CI_Controller
 
 		// The $_SESSION['error_prompted'] variable is used to ask the password
 		// again if none given or if the user enters wrong auth information.
-		if (empty($digest_string))
+		if (empty($digest_string) || (isset($_SESSION['error_prompted']) && $_SESSION['error_prompted'] == true))
 		{
+			$_SESSION['error_prompted'] = false;
 			$this->_force_login($uniqid);
 		}
 
@@ -1038,6 +1039,7 @@ abstract class REST_Controller extends CI_Controller
 
 		if ( ! array_key_exists('username', $digest) OR !$this->_check_login($digest['username']))
 		{
+			$_SESSION['error_prompted'] = true;
 			$this->_force_login($uniqid);
 		}
 
@@ -1055,11 +1057,7 @@ abstract class REST_Controller extends CI_Controller
 			$valid_pass = $q[0]['password'];
 		} else {
 			// no result found, Unauthorized
-			/*
-			header('HTTP/1.0 401 Unauthorized');
-			header('HTTP/1.1 401 Unauthorized');
-			exit;
-			*/
+			$_SESSION['error_prompted'] = true;
 			$this->_force_login($uniqid);
 		}
 
@@ -1070,6 +1068,7 @@ abstract class REST_Controller extends CI_Controller
 
 		if ($digest['response'] != $valid_response)
 		{
+			$_SESSION['error_prompted'] = true;
 			header('HTTP/1.0 401 Unauthorized');
 			header('HTTP/1.1 401 Unauthorized');
 			exit;
