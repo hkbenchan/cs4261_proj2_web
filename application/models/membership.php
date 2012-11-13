@@ -19,7 +19,7 @@ class Membership extends CI_Model {
 		$query = $this->db->insert('users', $data);
 		
 		if ($this->db->affected_rows() > 0) {
-			return array('code'=> 1, 'message'=>'success', )
+			return array('code'=> 1, 'message'=>'success');
 		}
 	}
 	
