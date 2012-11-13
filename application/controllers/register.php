@@ -11,7 +11,7 @@ class Register extends REST_Controller {
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
-		$this->load->model('membership');
+		$this->load->model('membership_model','membership');
 	}
 
 	public function index_get()
@@ -44,7 +44,7 @@ class Register extends REST_Controller {
 	{
 		$q = $this->membership->find_all();
 		if ($q['code'] > 0) {
- 			$this->response('<pre>'.print_r($q['data'],true).'</pre>',200);
+ 			$this->response('<pre>'.print_r($q['data']->result(),true).'</pre>',200);
 		} else {
 			$this->respons(array('message'=>'empty'),404);
 		}
