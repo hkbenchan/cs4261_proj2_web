@@ -50,6 +50,16 @@ class Membership_model extends CI_Model {
 		
 	}
 	
+	function login_email($email) {
+		$query = $this->db->from('user')->where('email',$email)->get();
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		} else {
+			return array();
+		}
+	}
+	
 }
 
 ?>

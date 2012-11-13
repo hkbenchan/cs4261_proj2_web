@@ -1013,15 +1013,29 @@ abstract class REST_Controller extends CI_Controller
 		preg_match_all('@(username|nonce|uri|nc|cnonce|qop|response)=[\'"]?([^\'",]+)@', $digest_string, $matches);
 		$digest = array_combine($matches[1], $matches[2]);
 
-		echo '<pre>'.print_r($digest,true).'</pre>';
-
 		if ( ! array_key_exists('username', $digest) OR !$this->_check_login($digest['username']))
 		{
 			$this->_force_login($uniqid);
 		}
 
-		$valid_logins = & $this->config->item('rest_valid_logins');
-		$valid_pass = $valid_logins[$digest['username']];
+
+/***** need to rewrite this part to get correct email and password *****/
+		// $valid_logins = & $this->config->item('rest_valid_logins');
+		// 	$valid_pass = $valid_logins[$digest['username']];
+/*****/
+		$this->load->model('membership_model','membership');
+		$this->load->helper('security');
+		
+		$q = $this->membership->login_email(xss_clean($digest['username']));
+		if (count($q)) {
+			$valid_logins = $q[0]['email'];
+			$valid_pass = $q[0]['password'];
+		} else {
+			// no result found, Unauthorized
+			header('HTTP/1.0 401 Unauthorized');
+			header('HTTP/1.1 401 Unauthorized');
+			exit;
+		}
 
 		// This is the valid response expected
 		$A1 = md5($digest['username'].':'.$this->config->item('rest_realm').':'.$valid_pass);
