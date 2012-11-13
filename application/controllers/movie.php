@@ -33,7 +33,6 @@ class Movie extends REST_Controller {
 */
 	protected function _check_login($username = '', $password = NULL)
 	{
-		echo "Self-check";
 		if (empty($username))
 		{
 			return FALSE;
@@ -52,7 +51,7 @@ class Movie extends REST_Controller {
 			return FALSE;
 		}*/
 		
-		$this->load->model('membership','membership_model');
+		$this->load->model('membership_model','membership');
 		$this->load->helper(array('form','security'));
 		
 		$data = array(
