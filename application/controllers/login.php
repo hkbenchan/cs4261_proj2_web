@@ -7,13 +7,11 @@ class Login extends REST_Controller {
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
-		// $this->early_check();
 		$this->load->model('membership_model','membership');
 	}
 	
 	protected function early_checks() {
 		// extend to auth users
-		echo "checking";
 	}
 	
 	public function index_post() {
@@ -28,7 +26,7 @@ class Login extends REST_Controller {
 		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|max_length[1]|xss_clean');
 		
 		if ($this->form_validation->run() === FALSE) {
-			$this->response(array('message'=>'Please check the input again.'), 404);
+			$this->response(array('message'=>'Please check the input again.'), 401);
 		}
 		
 		if (xss_clean($_POST['fb_auth']) == 'T') {
@@ -52,7 +50,7 @@ class Login extends REST_Controller {
 			// we have this entry, proceed
 			$this->response(array('message'=>'You\'re login'), 200);
 		} else {
-			$this->response(array('message'=>'Login failed. Please check your input again.'), 404);
+			$this->response(array('message'=>'Login failed. Please check your input again.'), 401);
 		}
 		
 	}

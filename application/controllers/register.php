@@ -61,7 +61,7 @@ class Register extends REST_Controller {
 		
 	}
 	
-	
+	/*
 	public function member_get()
 	{
 		$q = $this->membership->find_all();
@@ -71,7 +71,7 @@ class Register extends REST_Controller {
 			$this->response(array('message'=>'empty'),404);
 		}
 	}
-	
+	*/
 	/*
 	public function fb()
 	{
