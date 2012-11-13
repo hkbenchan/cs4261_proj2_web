@@ -2,7 +2,7 @@
 
 class Membership_model extends CI_Model {
 	
-	private $table;
+	protected $table;
 	
 	function __construct()
     {
