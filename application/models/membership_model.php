@@ -2,8 +2,6 @@
 
 class Membership_model extends CI_Model {
 	
-	protected $table	= "user";
-	
 /*	function __construct()
     {
         // Call the Model constructor
@@ -13,13 +11,13 @@ class Membership_model extends CI_Model {
 
 	function register($data) {
 		// lookup if email address already register
-		$query = $this->db->select("email")->from($table)->where("email",$data['email'])->get();
+		$query = $this->db->select("email")->from('user')->where("email",$data['email'])->get();
 		if ($query->num_rows() > 0) {
 			return array('code'=> -1,'message'=>'email is already registered');
 		}
 		
 		// insert the data now
-		$query = $this->db->insert($table, $data);
+		$query = $this->db->insert('user', $data);
 		
 		if ($this->db->affected_rows() > 0) {
 			return array('code'=> 1, 'message'=>'success');
