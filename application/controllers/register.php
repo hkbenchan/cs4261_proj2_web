@@ -26,7 +26,7 @@ class Register extends REST_Controller {
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('id','','xss_clean');
-		$this->form_validation->set_rules('username','','required|min_length[6]');
+		$this->form_validation->set_rules('username','','required|min_length[6]|xss_clean');
 		$this->form_validation->set_rules('password','','xss_clean');
 		$this->form_validation->set_rules('email','','required|valid_email');
 		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|xss_clean');
@@ -35,7 +35,27 @@ class Register extends REST_Controller {
 			$this->response(array('message'=>'Please check the input again.'), 404);
 		} else {
 			//add it into the server
-			$this->response(array('message'=>'added'),200);
+			if (xss_clean($POST['fb_auth']) == 'T') {
+				$data = array(
+					'fb_id' => xss_clean($POST['id']),
+					'username' => xss_clean($POST['username']),
+					'email' => xss_clean($POST['email']),
+				);
+			} else {
+				$data = array(
+					'username' => xss_clean($POST['username']),
+					'password' => xss_clean($POST['password']),
+					'email' => xss_clean($POST['email']),
+				);
+			}
+			$q = $this->membership->register($data);
+			
+			if ($q['code'] > 0) {
+				$this->response(array('message'=>'added'),200);
+			} else {
+				$this->response(array('message'=>$q['message']),404);
+			}
+			
 		}
 		
 	}

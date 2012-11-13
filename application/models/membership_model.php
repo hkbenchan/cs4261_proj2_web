@@ -21,7 +21,8 @@ class Membership_model extends CI_Model {
 		
 		if ($this->db->affected_rows() > 0) {
 			return array('code'=> 1, 'message'=>'success');
-		}
+		} else
+			return array('code'=> -1, 'message'=>'Error: '. $this->db->_error_message());
 	}
 	
 	function find_all() {
