@@ -1013,6 +1013,8 @@ abstract class REST_Controller extends CI_Controller
 		preg_match_all('@(username|nonce|uri|nc|cnonce|qop|response)=[\'"]?([^\'",]+)@', $digest_string, $matches);
 		$digest = array_combine($matches[1], $matches[2]);
 
+		echo '<pre>'.print_r($digest,true).'</pre>';
+
 		if ( ! array_key_exists('username', $digest) OR !$this->_check_login($digest['username']))
 		{
 			$this->_force_login($uniqid);

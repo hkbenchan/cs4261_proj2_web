@@ -71,7 +71,7 @@ $config['rest_auth'] = 'digest';
 // $config['auth_override_class_method']['deals']['view'] = 'none';
 // $config['auth_override_class_method']['deals']['insert'] = 'digest';
 // $config['auth_override_class_method']['accounts']['user'] = 'basic';
-
+$config['auth_override_class_method']['register']['index'] = 'none';
 /*
 |--------------------------------------------------------------------------
 | REST Login usernames

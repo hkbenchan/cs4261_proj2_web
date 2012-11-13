@@ -52,7 +52,10 @@ class Movie extends REST_Controller {
 		}*/
 		
 		$this->load->model('membership_model','membership');
-		$this->load->helper(array('form','security'));
+		$this->load->helper('security');
+		
+		if ($password === NULL)
+			return FALSE;
 		
 		$data = array(
 			'password' => xss_clean($password),
