@@ -1055,9 +1055,12 @@ abstract class REST_Controller extends CI_Controller
 			$valid_pass = $q[0]['password'];
 		} else {
 			// no result found, Unauthorized
+			/*
 			header('HTTP/1.0 401 Unauthorized');
 			header('HTTP/1.1 401 Unauthorized');
 			exit;
+			*/
+			$this->_force_login($uniqid);
 		}
 
 		// This is the valid response expected
