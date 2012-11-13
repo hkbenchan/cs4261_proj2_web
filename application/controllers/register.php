@@ -46,7 +46,7 @@ class Register extends REST_Controller {
 		if ($q['code'] > 0) {
  			$this->response('<pre>'.print_r($q['data']->result(),true).'</pre>',200);
 		} else {
-			$this->respons(array('message'=>'empty'),404);
+			$this->response(array('message'=>'empty'),404);
 		}
 	}
 	
