@@ -12,13 +12,13 @@ class Membership_model extends CI_Model {
 
 	function register($data) {
 		// lookup if email address already register
-		$query = $this->db->select("email")->from($table)->where("email",$data['email'])->get();
+		$query = $this->db->select("email")->from($this->table)->where("email",$data['email'])->get();
 		if ($query->num_rows() > 0) {
 			return array('code'=> -1,'message'=>'email is already registered');
 		}
 		
 		// insert the data now
-		$query = $this->db->insert($table, $data);
+		$query = $this->db->insert($this->table, $data);
 		
 		if ($this->db->affected_rows() > 0) {
 			return array('code'=> 1, 'message'=>'success');
@@ -26,7 +26,7 @@ class Membership_model extends CI_Model {
 	}
 	
 	function find_all() {
-		$query = $this->db->get($table);
+		$query = $this->db->get($this->table);
 		
 		if ($query->num_rows() > 0) {
 			return array('code'=> 1, 'data' => $query);
