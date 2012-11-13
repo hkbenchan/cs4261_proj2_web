@@ -8,7 +8,6 @@ class Membership extends CI_Model {
     {
         // Call the Model constructor
         parent::__construct();
-		echo "a"; die();
     }
 
 	function register($data) {
