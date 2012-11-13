@@ -7,6 +7,7 @@ class Login extends REST_Controller {
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
+		$this->early_check();
 		$this->load->model('membership_model','membership');
 	}
 	
