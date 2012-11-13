@@ -27,7 +27,7 @@ class Membership_model extends CI_Model {
 	}
 	
 	function find_all() {
-		$query = $this->db->get($table);
+		$query = $this->db->get('user');
 		
 		if ($query->num_rows() > 0) {
 			return array('code'=> 1, 'data' => $query);
