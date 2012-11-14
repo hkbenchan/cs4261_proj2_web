@@ -25,28 +25,28 @@ class Register extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('fb_id','','xss_clean');
-		$this->form_validation->set_rules('username','','required|min_length[6]|xss_clean');
-		$this->form_validation->set_rules('password','','required|xss_clean|min_length[6]');
-		$this->form_validation->set_rules('email','','required|valid_email');
-		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|max_length[1]|xss_clean');
+		$this->form_validation->set_rules('FB_ID','','xss_clean');
+		$this->form_validation->set_rules('Username','','required|min_length[6]|xss_clean');
+		$this->form_validation->set_rules('Password','','required|xss_clean|min_length[6]');
+		$this->form_validation->set_rules('Email','','required|valid_email');
+		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
 		
 		if ($this->form_validation->run() === FALSE) {
 			$this->response(array('message'=>'Please check the input again.'), 404);
 		} else {
 			//add it into the server
-			if (xss_clean($_POST['fb_auth']) == 'T') {
+			if (xss_clean($_POST['FB_auth']) == 'T') {
 				$data = array(
-					'fb_id' => xss_clean($_POST['fb_id']),
-					'username' => xss_clean($_POST['username']),
-					'password' => xss_clean($_POST['password']),
-					'email' => xss_clean($_POST['email']),
+					'FB_ID' => xss_clean($_POST['FB_ID']),
+					'Username' => xss_clean($_POST['Username']),
+					'Password' => xss_clean($_POST['Password']),
+					'Email' => xss_clean($_POST['Email']),
 				);
 			} else {
 				$data = array(
-					'username' => xss_clean($_POST['username']),
-					'password' => xss_clean($_POST['password']),
-					'email' => xss_clean($_POST['email']),
+					'Username' => xss_clean($_POST['Username']),
+					'Password' => xss_clean($_POST['Password']),
+					'Email' => xss_clean($_POST['Email']),
 				);
 			}
 			$q = $this->membership->register($data);

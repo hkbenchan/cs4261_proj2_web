@@ -14,4 +14,8 @@ class Movie extends REST_Controller {
 		$this->response(array('message'=>'Get movie'), 200);
 	}
 	
+	public function _get() {
+		
+	}
+	
 }

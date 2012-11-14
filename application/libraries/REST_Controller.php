@@ -951,8 +951,8 @@ abstract class REST_Controller extends CI_Controller
 		$this->load->helper('security');
 		
 		$data = array(
-			'password' => xss_clean($password),
-			'email' => xss_clean($username),
+			'Password' => xss_clean($password),
+			'Email' => xss_clean($username),
 		);
 		$q = $this->membership->find($data, 'F');
 		if ($q['code'] < 0) {
@@ -1053,8 +1053,8 @@ abstract class REST_Controller extends CI_Controller
 		
 		$q = $this->membership->login_email(xss_clean($digest['username']));
 		if (count($q)) {
-			$valid_logins = $q[0]['email'];
-			$valid_pass = $q[0]['password'];
+			$valid_logins = $q[0]['Email'];
+			$valid_pass = $q[0]['Password'];
 		} else {
 			// no result found, Unauthorized
 			$_SESSION['error_prompted'] = true;

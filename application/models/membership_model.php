@@ -11,13 +11,13 @@ class Membership_model extends CI_Model {
 
 	function register($data) {
 		// lookup if email address already register
-		$query = $this->db->select("email")->from('user')->where("email",$data['email'])->get();
+		$query = $this->db->select("Email")->from('Users')->where("Email",$data['Email'])->get();
 		if ($query->num_rows() > 0) {
 			return array('code'=> -1,'message'=>'Same email address is already registered');
 		}
 		
 		// insert the data now
-		$query = $this->db->insert('user', $data);
+		$query = $this->db->insert('Users', $data);
 		
 		if ($this->db->affected_rows() > 0) {
 			return array('code'=> 1, 'message'=>'success');
@@ -26,7 +26,7 @@ class Membership_model extends CI_Model {
 	}
 	
 	function find_all() {
-		$query = $this->db->get('user');
+		$query = $this->db->get('Users');
 		
 		if ($query->num_rows() > 0) {
 			return array('code'=> 1, 'data' => $query);
@@ -37,9 +37,9 @@ class Membership_model extends CI_Model {
 	
 	function find($data, $from_fb = 'F') {
 		if ($from_fb == 'T') {
-			$query = $this->db->from('user')->where('fb_id', $data['fb_id'])->where('password', $data['password'])->get();
+			$query = $this->db->from('Users')->where('FB_ID', $data['FB_ID'])->where('Password', $data['Password'])->get();
 		} else {
-			$query = $this->db->from('user')->where('email', $data['email'])->where('password', $data['password'])->get();
+			$query = $this->db->from('Users')->where('Email', $data['Email'])->where('Password', $data['Password'])->get();
 		}
 		
 		if ($query->num_rows() > 0) {
@@ -51,7 +51,7 @@ class Membership_model extends CI_Model {
 	}
 	
 	function login_email($email) {
-		$query = $this->db->from('user')->where('email',$email)->get();
+		$query = $this->db->from('Users')->where('Email',$email)->get();
 		
 		if ($query->num_rows() > 0) {
 			return $query->result_array();
