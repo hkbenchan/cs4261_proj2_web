@@ -47,8 +47,7 @@ class Movie extends REST_Controller {
 	public function box_offices2_get() {
 		$this->load->helper('file');
 		$content = read_file(APPPATH.'movies/i/box_offices.dat');
-		var_dump($content);
-		if ( !$content) {
+		if ($content !== FALSE) {
 			$this->response(unserialize($content), 200);
 		} else {
 			$this->response(array('message'=>'Fail to open'), 404);
