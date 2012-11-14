@@ -76,13 +76,12 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			));
 			if ($result == false) { return false ;}
 			// store it somewhere on the cache
-
+			return json_decode($result, true);
 		}
 		elseif ( $item == 'movie_theaters' )
 		{
 			
 		}
-		return true;
 	}
 }
 

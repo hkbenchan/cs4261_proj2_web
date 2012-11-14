@@ -15,7 +15,10 @@ class Movie extends REST_Controller {
 	}
 	
 	public function box_offices_get() {
-		
+		$this->load->helper('fetchinfo');
+ 		$result = fetch_rotten_tomato(1);
+		echo '<pre>'.print_r($result,true).'</pre>';
+		die();
 	}
 	
 }
