@@ -4,7 +4,7 @@ require(APPPATH.'libraries/REST_Controller.php');
 
 class Movie extends REST_Controller {
 	
-	private $update_interval = 60 * 5; // 5 mins
+	private $update_interval = 300; // 5 mins
 	
 	function __construct() {
 		// Call the REST_Controller constructor
