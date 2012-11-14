@@ -3,7 +3,9 @@
 require(APPPATH.'libraries/REST_Controller.php');
 
 class Movie extends REST_Controller {
-		
+	
+	private $update_interval = 60 * 5; // 5 mins
+	
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
@@ -27,31 +29,29 @@ class Movie extends REST_Controller {
 		$this->load->helper('fetchinfo');
  		$this->load->helper('file');
 		
-		
 		// check if it needs to update
-		
-		$result = fetch_rotten_tomato(1);
-		
-		if (! write_file(APPPATH.'movies/i/box_offices.dat', serialize($result))) {
-			$this->response(array('message'=>'Fail writing file.'), 500);
+		$file_info = get_file_info(APPPATH.'movie/i/box_offices.dat');
+		if ($file_info != FALSE && (time()-$file_info['date']<$update_interval))
+		{
+			// do nothing
 		} else {
-			$this->response(array('message'=>'success'),200);
+			// need to update
+			$result = fetch_rotten_tomato(1);
+			if ($result == FALSE) {
+				$this->response(array('message'=>'api fail'),500);
+			}
+			if (! write_file(APPPATH.'movies/i/box_offices.dat', serialize($result))) {
+				$this->response(array('message'=>'Fail writing file.'), 500);
+			}
 		}
 		
-		//echo '<pre>'.print_r($result,true).'</pre>';
-		//die();
-		
-		
-	}
-	
-	public function box_offices2_get() {
-		$this->load->helper('file');
 		$content = read_file(APPPATH.'movies/i/box_offices.dat');
 		if ($content !== FALSE) {
 			$this->response(unserialize($content), 200);
 		} else {
 			$this->response(array('message'=>'Fail to open'), 404);
 		}
+		
 	}
 	
 }
