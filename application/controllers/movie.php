@@ -14,13 +14,14 @@ class Movie extends REST_Controller {
 		$this->load->helper('file');
 		$data = 'Some file data';
 		$response_a = array();
-		if ( ! write_file(APPPATH.'movies/i/file.php', $data))
+		if (! write_file(APPPATH.'movies/i/file.php', $data))
 		{
-		     $response_a['message'] = 'Unable to write the file';
+			$response_a['message'] = 'Unable to write the file';
 		}
 		else
 		{
-		     $response_a['message'] = 'File written!';
+			$response_a['message'] = 'File written!';
+			$response_a['file_info'] = get_file_info(APPPATH.'movies/i/file.php');
 		}
 		$this->response($response_a, 200);
 	}
