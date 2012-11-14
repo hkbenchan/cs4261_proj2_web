@@ -14,7 +14,7 @@ class Movie extends REST_Controller {
 		$this->load->helper('file');
 		$data = 'Some file data';
 		$response_a = array();
-		if ( ! write_file('./file.php', $data))
+		if ( ! write_file(APPPATH.'movies/i/file.php', $data))
 		{
 		     $response_a['message'] = 'Unable to write the file';
 		}
