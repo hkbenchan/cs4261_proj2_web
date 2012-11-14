@@ -11,14 +11,32 @@ class Movie extends REST_Controller {
 	}	
 	
 	public function index_get() {
-		$this->response(array('message'=>'Get movie'), 200);
+		$this->load->helper('file');
+		$data = 'Some file data';
+		$response_a = array();
+		if ( ! write_file('./movies/i/file.php', $data))
+		{
+		     $response_a['message'] = 'Unable to write the file';
+		}
+		else
+		{
+		     $response_a['message'] = 'File written!';
+		}
+		$this->response($response_a, 200);
 	}
 	
 	public function box_offices_get() {
 		$this->load->helper('fetchinfo');
- 		$result = fetch_rotten_tomato(1);
-		echo '<pre>'.print_r($result,true).'</pre>';
-		die();
+ 		$this->load->helper('file');
+		
+		
+		// check if it needs to update
+		
+		$result = fetch_rotten_tomato(1);
+		//echo '<pre>'.print_r($result,true).'</pre>';
+		//die();
+		
+		
 	}
 	
 }
