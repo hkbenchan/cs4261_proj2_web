@@ -37,7 +37,7 @@ class Movie extends REST_Controller {
 		} else {
 			// need to update
 			$this->load->helper('fetchinfo');
-			$result = fetch_rotten_tomato(1);
+			$result = fetch_rotten_tomato(1,$this->page_limit);
 			if ($result == FALSE) {
 				$this->response(array('message'=>'api fail'),500);
 			}
@@ -91,6 +91,35 @@ class Movie extends REST_Controller {
 		} else {
 			$this->response(array('message'=>'Wrong page number.'), 404);
 		}
+	}
+	
+	public function opening_get() {
+		$this->load->helper('file');
+		
+		// check if it needs to update
+		$file_info = get_file_info(APPPATH.'movies/i/opening.dat');
+		if ($file_info != FALSE && (time()-$file_info['date']<$this->update_interval))
+		{
+			// do nothing
+		} else {
+			// need to update
+			$this->load->helper('fetchinfo');
+			$result = fetch_rotten_tomato(3, $page_limit);
+			if ($result == FALSE) {
+				$this->response(array('message'=>'api fail'),500);
+			}
+			if (! write_file(APPPATH.'movies/i/opening.dat', serialize($result))) {
+				$this->response(array('message'=>'Fail writing file.'), 500);
+			}
+		}
+
+		$content = read_file(APPPATH.'movies/i/opening.dat');
+		if ($content !== FALSE) {
+			$this->response(unserialize($content), 200);
+		} else {
+			$this->response(array('message'=>'Fail to open'), 404);
+		}
+			
 	}
 	
 }

@@ -70,13 +70,11 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			
 			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json",
 			array(
-				"limit" => 30,
+				"limit" => $page_limit,
 				"country" => "us",
 				"apikey" => $rotten_tomato_key,
 			));
-			if ($result == false) { return false ;}
-			// store it somewhere on the cache
-			return json_decode($result, true);
+			
 		}
 		elseif ( $item == 'movie_theaters' )
 		{
@@ -88,10 +86,22 @@ if ( ! function_exists('fetch_rotten_tomato'))
 				"apikey" => $rotten_tomato_key,
 			));
 			
-			if ($result == false) { return false; }
-			// store it somewhere on the cache
-			return json_decode($result, true);
 		}
+		elseif ( $item == 'movie_opening')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json",
+			array(
+				"limit" => $page_limit,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+			
+		}
+		
+		
+		if ($result == false) { return false; }
+		// store it somewhere on the cache
+		return json_decode($result, true);
 	}
 }
 
