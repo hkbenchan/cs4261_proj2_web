@@ -26,7 +26,6 @@ class Movie extends REST_Controller {
 	}
 	
 	public function box_offices_get() {
-		$this->load->helper('fetchinfo');
  		$this->load->helper('file');
 		
 		// check if it needs to update
@@ -36,7 +35,8 @@ class Movie extends REST_Controller {
 			// do nothing
 		} else {
 			// need to update
-			echo "updated";
+			echo time()-$file_info['date'];
+			$this->load->helper('fetchinfo');
 			$result = fetch_rotten_tomato(1);
 			if ($result == FALSE) {
 				$this->response(array('message'=>'api fail'),500);
