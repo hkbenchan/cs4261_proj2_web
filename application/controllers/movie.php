@@ -29,7 +29,7 @@ class Movie extends REST_Controller {
  		$this->load->helper('file');
 		
 		// check if it needs to update
-		$file_info = get_file_info(APPPATH.'movie/i/box_offices.dat');
+		$file_info = get_file_info(APPPATH.'movies/i/box_offices.dat');
 		var_dump($file_info);
 		$t = time();
 		if ($file_info != FALSE && (time()-$file_info['date']<$update_interval))
