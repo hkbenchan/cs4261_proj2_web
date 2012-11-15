@@ -58,7 +58,7 @@ class Movie extends REST_Controller {
 	public function in_theaters_get() {
 		$this->load->helper('file');
 		$page_no = $this->input->get('page',true);
-		
+		echo "Page no: ".$page_no;
 		if ($page_no == FALSE)
 			$page_no = 1;
 		if (is_numeric($page_no)) {
