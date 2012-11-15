@@ -36,6 +36,7 @@ class Movie extends REST_Controller {
 			// do nothing
 		} else {
 			// need to update
+			echo "updated";
 			$result = fetch_rotten_tomato(1);
 			if ($result == FALSE) {
 				$this->response(array('message'=>'api fail'),500);
