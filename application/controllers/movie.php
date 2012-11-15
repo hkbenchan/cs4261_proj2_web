@@ -30,14 +30,11 @@ class Movie extends REST_Controller {
 		
 		// check if it needs to update
 		$file_info = get_file_info(APPPATH.'movies/i/box_offices.dat');
-		var_dump($file_info);
-		$t = time();
-		if ($file_info != FALSE && (time()-$file_info['date']<$update_interval))
+		if ($file_info != FALSE && (time()-$file_info['date']<$this->update_interval))
 		{
 			// do nothing
 		} else {
 			// need to update
-			echo time()-$file_info['date'];
 			$this->load->helper('fetchinfo');
 			$result = fetch_rotten_tomato(1);
 			if ($result == FALSE) {
