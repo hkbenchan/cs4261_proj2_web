@@ -80,7 +80,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		}
 		elseif ( $item == 'movie_theaters' )
 		{
-			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json"),
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json",
 			array(
 				"page_limit" => $page_limit,
 				"page" => $page_no,
