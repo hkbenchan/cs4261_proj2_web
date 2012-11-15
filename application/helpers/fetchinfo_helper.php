@@ -70,7 +70,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			
 			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json",
 			array(
-				"limit" => 16,
+				"limit" => 30,
 				"country" => "us",
 				"apikey" => $rotten_tomato_key,
 			));
