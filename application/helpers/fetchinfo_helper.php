@@ -38,7 +38,7 @@
  */
 if ( ! function_exists('fetch_rotten_tomato'))
 {
-	function fetch_rotten_tomato($item = 0)
+	function fetch_rotten_tomato($item = 0, $page_limit = 20, $page_no = 1)
 	{
 		$rotten_tomato_index = array(
 			0 => '',
@@ -80,7 +80,17 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		}
 		elseif ( $item == 'movie_theaters' )
 		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json"),
+			array(
+				"page_limit" => $page_limit,
+				"page" => $page_no,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
 			
+			if ($result == false) { return false; }
+			// store it somewhere on the cache
+			return json_decode($result, true);
 		}
 	}
 }
