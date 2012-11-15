@@ -104,7 +104,7 @@ class Movie extends REST_Controller {
 		} else {
 			// need to update
 			$this->load->helper('fetchinfo');
-			$result = fetch_rotten_tomato(3, $page_limit);
+			$result = fetch_rotten_tomato(3, $this->page_limit);
 			if ($result == FALSE) {
 				$this->response(array('message'=>'api fail'),500);
 			}
