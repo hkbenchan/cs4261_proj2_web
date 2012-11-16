@@ -54,7 +54,7 @@ class Membership_model extends CI_Model {
 		$query = $this->db->from('Users')
 				->where('FB_ID', $data['FB_ID'])
 				->where('Username', $data['Username'])
-				->where('Password', $data['Password'])
+				->where('Email', $data['Email'])
 				->get();
 		if ($query->num_rows() > 0) {
 			return array('code'=> 1, 'data' => $query);
