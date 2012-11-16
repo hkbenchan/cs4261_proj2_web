@@ -61,17 +61,47 @@ class Register extends REST_Controller {
 		
 	}
 	
-	/*
-	public function member_get()
+	
+	public function member_exists_post()
 	{
+		$this->load->helper(array('form','security'));
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('FB_ID','','xss_clean');
+		$this->form_validation->set_rules('Username','','required|min_length[6]|xss_clean');
+		$this->form_validation->set_rules('Email','','required|valid_email');
+		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->response(array('message'=>'Please check the input again.'), 404);
+		} else {
+			if (xss_clean($this->input->post('FB_auth')) == 'T') {
+				$data = array(
+					'FB_ID' => $this->input->post('FB_ID'),
+					'Email' => $this->input->post('Email'),
+					'Username' => $this->input->post('Username'), 
+				);
+				
+				$q = $this->membership->verify($data);
+				if ($q['code'] > 0) {
+					$this->response(array('message'=>'Member exists.'), 200);
+				} else {
+					$this->response(array('message'=>'Member does not exists.'), 200);
+				}
+			} else {
+				$this->response(array('message'=>'method does not exist.'), 404);
+			}
+		}
+		/*
 		$q = $this->membership->find_all();
 		if ($q['code'] > 0) {
  			$this->response('<pre>'.print_r($q['data']->result(),true).'</pre>',200);
 		} else {
 			$this->response(array('message'=>'empty'),404);
 		}
+		*/
 	}
-	*/
+	
 	/*
 	public function fb()
 	{

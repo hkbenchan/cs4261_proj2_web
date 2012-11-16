@@ -50,6 +50,20 @@ class Membership_model extends CI_Model {
 		
 	}
 	
+	function verify($data) {
+		$query = $this->db->from('Users')
+				->where('FB_ID', $data['FB_ID'])
+				->where('Username', $data['Username'])
+				->where('Password', $data['Password'])
+				->get();
+		if ($query->num_rows() > 0) {
+			return array('code'=> 1, 'data' => $query);
+		} else {
+			return array('code'=> -1, 'data' => array());
+		}		
+				
+	}
+	
 	function login_email($email) {
 		$query = $this->db->from('Users')->where('Email',$email)->get();
 		
