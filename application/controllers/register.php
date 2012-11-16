@@ -62,7 +62,7 @@ class Register extends REST_Controller {
 	}
 	
 	
-	public function memberExists_post()
+	public function member_exists_post()
 	{
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
