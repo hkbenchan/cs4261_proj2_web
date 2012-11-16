@@ -32,7 +32,7 @@ class Register extends REST_Controller {
 		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
 		
 		if ($this->form_validation->run() === FALSE) {
-			$this->response(array('code' => '-1', 'message'=>'Please check the input again.'), 200);
+			$this->response(array('message'=>'Please check the input again.'), 404);
 		} else {
 			//add it into the server
 			if (xss_clean($_POST['FB_auth']) == 'T') {
@@ -54,7 +54,7 @@ class Register extends REST_Controller {
 			if ($q['code'] > 0) {
 				$this->response(array('message'=>'added'),200);
 			} else {
-				$this->response(array('code'=>'-1','message'=>$q['message']),200);
+				$this->response(array('message'=>$q['message']), 404);
 			}
 			
 		}
