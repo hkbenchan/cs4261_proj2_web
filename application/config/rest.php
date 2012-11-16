@@ -72,7 +72,7 @@ $config['rest_auth'] = 'digest';
 // $config['auth_override_class_method']['deals']['insert'] = 'digest';
 // $config['auth_override_class_method']['accounts']['user'] = 'basic';
 $config['auth_override_class_method']['register']['index'] = 'none';
-$config['auth_override_class_methog']['register']['member_exists'] = 'none';
+$config['auth_override_class_method']['register']['member_exists'] = 'none';
 /*
 |--------------------------------------------------------------------------
 | REST Login usernames
