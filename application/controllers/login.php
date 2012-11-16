@@ -20,7 +20,7 @@ class Login extends REST_Controller {
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('fb_id','','xss_clean');
-		$this->form_validation->set_rules('username','','required|min_length[6]|xss_clean');
+		$this->form_validation->set_rules('username','','required|min_length[1]|xss_clean');
 		$this->form_validation->set_rules('password','','required|xss_clean|min_length[6]');
 		$this->form_validation->set_rules('email','','required|valid_email');
 		$this->form_validation->set_rules('fb_auth','','required|min_length[1]|max_length[1]|xss_clean');

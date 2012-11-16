@@ -26,7 +26,7 @@ class Register extends REST_Controller {
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('FB_ID','','xss_clean');
-		$this->form_validation->set_rules('Username','','required|min_length[6]|xss_clean');
+		$this->form_validation->set_rules('Username','','required|min_length[1]|xss_clean');
 		$this->form_validation->set_rules('Password','','required|xss_clean|min_length[6]');
 		$this->form_validation->set_rules('Email','','required|valid_email');
 		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
@@ -68,7 +68,7 @@ class Register extends REST_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('FB_ID','','xss_clean');
-		$this->form_validation->set_rules('Username','','required|min_length[6]|xss_clean');
+		$this->form_validation->set_rules('Username','','required|min_length[1]|xss_clean');
 		$this->form_validation->set_rules('Email','','required|valid_email');
 		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
 
