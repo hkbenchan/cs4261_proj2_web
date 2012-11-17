@@ -26,7 +26,7 @@ class Movie extends REST_Controller {
 		$this->response($response_a, 200);
 	}
 	
-	protected function update($tomato_ref = 0, $path = '', $page_limit = $this->page_limit, $page = 1) {
+	protected function update($tomato_ref = 0, $path = '', $page_limit = 20, $page = 1) {
 		if ($path == '') {
 			$this->response(array('message'=>'Fail writing file.'), 500);
 		}
