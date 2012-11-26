@@ -31,6 +31,7 @@ class Event extends REST_Controller {
 	public function create_post(){
 		
 			$invited_users = $this->input->post('invited');
+			var_dump($invited_users);
 			echo count($invited_users); die();
 		
 		
