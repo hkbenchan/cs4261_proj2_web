@@ -73,6 +73,11 @@ $config['rest_auth'] = 'digest';
 // $config['auth_override_class_method']['accounts']['user'] = 'basic';
 $config['auth_override_class_method']['register']['index'] = 'none';
 $config['auth_override_class_method']['register']['member_exists'] = 'none';
+$config['auth_override_class_method']['movie']['index'] = 'none';
+$config['auth_override_class_method']['movie']['box_offices'] = 'none';
+$config['auth_override_class_method']['movie']['in_threaters'] = 'none';
+$config['auth_override_class_method']['movie']['opening'] = 'none';
+$config['auth_override_class_method']['movie']['upcoming'] = 'none';
 /*
 |--------------------------------------------------------------------------
 | REST Login usernames
