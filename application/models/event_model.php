@@ -35,4 +35,22 @@ class Event_model extends CI_Model {
 		}
 		
 	}
+	
+	public function create_event($data) {
+		$this->db->insert('Event',$data);
+		
+		if ($this->db->affected_rows()>0) 
+			return $this->db->insert_id();
+		else
+			return FALSE;
+	}
+	
+	public function addOwnerEvent($data) {
+		$this->db->insert('UserOwnsEvent', $data);
+		
+		if ($this->db->affected_rows()>0)
+			return TRUE;
+		else
+			return FALSE;
+	}
 }

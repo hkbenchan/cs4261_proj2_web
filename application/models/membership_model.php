@@ -64,6 +64,17 @@ class Membership_model extends CI_Model {
 				
 	}
 	
+	function user_id_by_FB($fb_id) {
+		$query = $this->db->select('ID')->from('Users')->where('FB_ID', $fb_id)->get();
+		
+		if ($query->num_rows() > 0) {
+			$r = $query->result();
+			return $r['ID'];
+		} else {
+			return FALSE;
+		}
+	}
+	
 	function login_email($email) {
 		$query = $this->db->from('Users')->where('Email',$email)->get();
 		
