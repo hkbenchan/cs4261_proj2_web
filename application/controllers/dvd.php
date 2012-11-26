@@ -33,6 +33,7 @@ class Dvd extends REST_Controller {
 		
 		$this->load->helper('fetchinfo');
 		$result = fetch_rotten_tomato($tomato_ref,$page_limit,$page);
+		var_dump($result);
 		if ($result == FALSE) {
 			$this->response(array('message'=>'api fail'),500);
 		}
