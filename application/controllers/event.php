@@ -75,7 +75,7 @@ class Event extends REST_Controller {
 		$data = array(
 			'User_ID' => $User_id,
 			'Event_ID' => $event_id,
-		)
+		);
 		$result = $this->event->addOwnerEvent($data);
 		
 		if ($result == FALSE) {
