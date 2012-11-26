@@ -30,10 +30,15 @@ class Event extends REST_Controller {
 	
 	public function create_post(){
 		
-			$invited_users = $this->input->post('invited');
-			var_dump($invited_users);
-			echo count($invited_users); die();
-		
+		$invited_users = $this->input->post('invited');
+		if ($invited_users == FALSE) {
+			// finish
+		} else {
+			foreach ($invited_users as $id) {
+				var_dump($id);
+			}
+		}
+		die();
 		
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
@@ -85,7 +90,11 @@ class Event extends REST_Controller {
 		
 		// for each included user (FB_ID), add them to the UserInvitedEvent
 		// $invited_users = $this->input->post('invited');
-		// 	echo 
+		// 		if ($invited_users == FALSE) {
+		// 			// finish
+		// 		} else {
+		// 			foreach ($invited_users)
+		// 		}
 		
 	}
 	
