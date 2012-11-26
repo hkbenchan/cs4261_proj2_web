@@ -21,7 +21,7 @@ class Event_model extends CI_Model {
 		$q1 = $this->get_event_lists_own($FB_ID);
 		$q2 = $this->get_event_lists_invited($FB_ID);
 		
-		if (count($q1)+count($q2)>0) {
+		if (count($q1->result())+count($q2->result())>0) {
 			return array('code' => 1,
 						 'data' => array(
 										'own'=>$q1->result(),
