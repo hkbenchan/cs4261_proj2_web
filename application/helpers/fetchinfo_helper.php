@@ -138,6 +138,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		}
 		elseif ( $item == 'dvd_upcoming')
 		{
+			echo "I'm in dvd_upcoming";
 			$result = $CI->curl->simple_get("http://api.rottentomates.com/api/public/v1.0/lists/dvds/upcoming.json",
 			array(
 				"page_limit" => $page_limit,
@@ -145,6 +146,9 @@ if ( ! function_exists('fetch_rotten_tomato'))
 				"country" => "us",
 				"apikey" => $rotten_tomato_key,
 			));
+			if ($result == false) {
+				echo $this->curl->error_code.' error : '.$this->curl->error_string;
+			}
 		}
 		
 		if ($result == false) { return false; }
