@@ -25,7 +25,7 @@ class Register extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FB_ID','','xss_clean');
+		$this->form_validation->set_rules('FB_ID','','required|xss_clean');
 		$this->form_validation->set_rules('Username','','required|min_length[1]|xss_clean');
 		$this->form_validation->set_rules('Password','','required|xss_clean|min_length[6]');
 		$this->form_validation->set_rules('Email','','required|valid_email');

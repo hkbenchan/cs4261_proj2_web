@@ -7,12 +7,6 @@ class Dvd extends REST_Controller {
 	private $update_interval = 300; // 5 mins
 	private $page_limit = 20; // 20 results per page
 	
-	function __construct() {
-		// Call the REST_Controller constructor
-        parent::__construct();
-		// $this->load->model('movie','movie_model');
-	}	
-	
 	public function index_get() {
 		$this->load->helper('file');
 		$data = 'Some file data';

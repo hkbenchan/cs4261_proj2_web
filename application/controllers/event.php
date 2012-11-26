@@ -7,7 +7,7 @@ class Event extends REST_Controller {
 	function __construct() {
 		// Call the REST_Controller constructor
         parent::__construct();
-		$this->load->model('event','event_model');
+		$this->load->model('event_model','event');
 	}
 	
 	
