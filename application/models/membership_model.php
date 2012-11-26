@@ -10,10 +10,10 @@ class Membership_model extends CI_Model {
     }*/
 
 	function register($data) {
-		// lookup if email address already register
-		$query = $this->db->select("Email")->from('Users')->where("Email",$data['Email'])->get();
+		// lookup if FB_ID already register
+		$query = $this->db->select("FB_ID")->from('Users')->where("FB_ID",$data['FB_ID'])->get();
 		if ($query->num_rows() > 0) {
-			return array('code'=> -1,'message'=>'Same email address is already registered');
+			return array('code'=> -1,'message'=>'Same Facebook ID is already registered');
 		}
 		
 		// insert the data now
