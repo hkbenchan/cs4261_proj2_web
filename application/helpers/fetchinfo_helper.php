@@ -97,7 +97,55 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			));
 			
 		}
-		
+		elseif ( $item == 'movie_upcoming')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json",
+			array(
+				"page_limit" => $page_limit,
+				"page" => $page_no,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
+		elseif ( $item == 'dvd_top_rent')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json",
+			array(
+				"limit" => $page_limit,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
+		elseif ( $item == 'dvd_current')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json",
+			array(
+				"page_limit" => $page_limit,
+				"page" => $page_no,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
+		elseif ( $item == 'dvd_new')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json",
+			array(
+				"page_limit" => $page_limit,
+				"page" => $page_no,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
+		elseif ( $item == 'dvd_upcoming')
+		{
+			$result = $CI->curl->simple_get("http://api.rottentomates.com/api/public/v1.0/lists/dvds/upcoming.json",
+			array(
+				"page_limit" => $page_limit,
+				"page" => $page_no,
+				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
 		
 		if ($result == false) { return false; }
 		// store it somewhere on the cache
