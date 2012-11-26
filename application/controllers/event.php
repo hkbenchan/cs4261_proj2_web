@@ -16,7 +16,7 @@ class Event extends REST_Controller {
 		// get the user's event list by FB_ID
 		$FB_ID = $this->input->get('FB_ID',true);
 		if (is_numeric($FB_ID)) {
-			$result = $this->event->get_event_list_all($FB_ID);
+			$result = $this->event->get_event_lists_all($FB_ID);
 			if ($result['code']>0) {
 				$this->response($result,200);
 			} else {
