@@ -52,7 +52,7 @@ class Movie extends REST_Controller {
 			// do nothing
 		} else {
 			// need to update
-			$this->update(1,'movies/i/box_offies.dat',$this->page_limit);
+			$this->update(1,'movies/i/box_offices.dat',$this->page_limit);
 		}
 		
 		$content = read_file(APPPATH.'movies/i/box_offices.dat');
