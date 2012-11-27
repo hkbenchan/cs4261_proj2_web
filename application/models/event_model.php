@@ -126,7 +126,7 @@ class Event_model extends CI_Model {
 	}
 	
 	public function updateOwnEventVote($data, $Movie_vote) {
-		$this->db->update('EventMovie',array('Movie_vote'=>$Movie_vote),$data);
+		$this->db->update('UserOwnsEvent',array('Movie_vote'=>$Movie_vote),$data);
 
 		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
 			return TRUE;
