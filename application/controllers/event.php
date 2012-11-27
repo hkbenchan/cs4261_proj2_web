@@ -262,7 +262,7 @@ class Event extends REST_Controller {
 				$Movie_ID = array();
 			}
 			
-			$processed = array();)
+			$processed = array();
 			$j = count($Movie_ID);
 			for ($i = 0; $i< $j; $i++) {
 				$processed[$i] = FALSE;
