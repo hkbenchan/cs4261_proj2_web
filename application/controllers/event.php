@@ -100,29 +100,103 @@ class Event extends REST_Controller {
 			}
 		}
 		
-		$this->response(array('code'=>1,'message'=>'created event','invite'=>$i, 'invited'=>$j),200);
+		$this->response(array('code'=>1,'message'=>'created event','event_id'=>$event_id,'invite'=>$i, 'invited'=>$j),200);
 
 	}
 	
 	public function vote_movies_post(){
 		
+		$this->load->helper(array('form','security'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('FB_ID','required|numeric');
+		$this->form_validation->set_rules('Event_ID', 'required|numeric');
+		$this->form_validation->set_rules('Movie_ID', 'required|numeric');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
+		}
+		
+		// get the User_ID
+		$this->load->model('membership_model','membership');
+		
+		$User_id = $this->membership->user_id_by_FB($this->input->post('FB_ID'));
+		if ($User_id == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'ID not found'), 401);
+		}
+		
 		// check if event exists (own)
-			// true
+		$result = $this->event->findOwnEvent($User_id, $this->input->post('Event_ID'));
+		if ($result != FALSE) {
 			// check if the movie is in the event's movie list
-			// check if user is already made a vote
-				// true
-				// reduce one vote from the event's movie list (old)
-			// add one vote from the event's movie list (new)
-			// modify the entry inside the UserOwnsEvents
-		// check if event exists (invited)
-			// true
-			// check if the movie is in the event's movie list
-			// check if user is already made a vote
-				// true
-				// reduce one vote from the event's movie list (old)
-			// add one vote from the event's movie list (new)
-			// modify the entry inside the UserInvitedEvents
 			
+			$result_EM = $this->event->findEventMovie($this->input->post('Event_ID'), $this->input->post('Movie_ID'));
+			
+			if ($result_EM == FALSE) {
+				$this->response(array('code'=>-1, 'message'=>'Movie is not included in the list'), 401);
+			}
+			
+			// check if user is already made a vote
+			$r = $result->first_row('array');
+			$r_EM = $result->first_row('array');
+			if ($r['Movie_ID'] != -1) {
+				// reduce one vote from the event's movie list (old)
+				$data = array(
+					'Event_ID' => $r['Event_ID'],
+					'Movie_ID' => $r['Movie_ID'],
+				);
+				$r2 = $this->event->reduceVote($data);
+				if ($r2 == FALSE)
+					$this->response(array('code'=>-1, 'message'=>'Fail to remove vote'), 500);
+			}
+			
+			// add one vote from the event's movie list (new)
+			
+			$data = array(
+				'Event_ID' => $r['Event_ID'],
+				'Movie_ID' => $this->input->post('Movie_ID'),
+			);
+			$r2 = $this->event->addVote($data, $r_EM['no_of_vote']+1);
+			
+			if ($r2 == FALSE)
+				$this->response(array('code'=>-1, 'message'=>'Fail to add vote'), 500);
+			
+			// modify the entry inside the UserOwnsEvents
+			
+			$data = array(
+				'Event_ID' => $r['Event_ID'],
+				'User_ID' => $User_id,
+			);
+			
+			$r2 = $this->event->updateOwnEventVote($data, $this->input->post('Movie_ID'));
+			
+			if ($r2 == FALSE)
+				$this->response(array('code'=>-1, 'message'=>'Fail to modify vote record'), 500);
+			else
+				$this->response(array('code'=>-1, 'message'=>'success'), 200);
+			
+			
+		} else {
+			// check if event exists (invited)
+			$result = $this->event->findInviteEvent($User_id, $this->input->post('Event_ID'));
+			if ($result != FALSE) {
+				// check if the movie is in the event's movie list
+				
+				$result_EM = $this->event->findEventMovie($this->input->post('Event_ID'), $this->input->post('Movie_ID'));
+
+				if ($result_EM == FALSE) {
+					$this->response(array('code'=>-1, 'message'=>'Movie is not included in the list'), 401);
+				}
+				
+				// check if user is already made a vote
+					// true
+					// reduce one vote from the event's movie list (old)
+				// add one vote from the event's movie list (new)
+				// modify the entry inside the UserInvitedEvents
+			} else {
+				$this->response(array('code'=>-1,'message'=>'You do not have permission'), 401);
+			}
+		}
 	}
 	
 	public function edit_movie_lists_post(){
