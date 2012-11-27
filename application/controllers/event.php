@@ -255,7 +255,7 @@ class Event extends REST_Controller {
 		
 		// check if event exists (own)
 		
-		$result = $this->event->findOwnEvent($User_id, $this->input->post('Event_ID'));
+		$result = $this->event->findOwnEvent($User_id, $Event_ID);
 		if ($result != FALSE) {
 			$Movie_ID = $this->input->post('Movie_ID');
 			if ($Movie_ID == false) {
@@ -268,8 +268,10 @@ class Event extends REST_Controller {
 				$processed[$i] = FALSE;
 			}
 			
+			$result2 = $this->event->getMovieList($Event_ID);
+			
 			// compare the database lists with new lists
-			foreach ($result as $id => $row) {
+			foreach ($result2 as $id => $row) {
 				// for each movie needs to remove
 				print_r($row); die();
 				$tmp = array_search($row['Movie_ID'],$Movie_ID);
