@@ -69,7 +69,7 @@ class Membership_model extends CI_Model {
 		
 		if ($query->num_rows() > 0) {
 			$r = $query->result();
-			return $r['ID'];
+			return $r[0]['ID'];
 		} else {
 			return FALSE;
 		}
