@@ -273,7 +273,7 @@ class Event extends REST_Controller {
 				// for each movie needs to remove
 				$tmp = array_search($row['Movie_ID'],$Movie_ID);
 				if ($tmp == FALSE) {
-					$this->event->removeMovieFromList($Event_ID, $Movie_ID);
+					$this->event->removeMovieFromList($Event_ID, $row['Movie_ID']);
 				} else {
 					$processed[$tmp] = TRUE;
 				}
