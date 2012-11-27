@@ -263,6 +263,7 @@ class Event extends REST_Controller {
 			}
 			
 			$processed = array();
+			echo count($Movie_ID); die();
 			$j = count($Movie_ID);
 			for ($i = 0; $i< $j; $i++) {
 				$processed[$i] = FALSE;
