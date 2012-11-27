@@ -271,6 +271,7 @@ class Event extends REST_Controller {
 			// compare the database lists with new lists
 			foreach ($result as $id => $row) {
 				// for each movie needs to remove
+				print_r($row); die();
 				$tmp = array_search($row['Movie_ID'],$Movie_ID);
 				if ($tmp == FALSE) {
 					$this->event->removeMovieFromList($Event_ID, $row['Movie_ID']);
