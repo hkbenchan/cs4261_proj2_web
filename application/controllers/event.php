@@ -139,11 +139,11 @@ class Event extends REST_Controller {
 			// check if user is already made a vote
 			$r = $result->first_row('array');
 			$r_EM = $result->first_row('array');
-			if ($r['Movie_ID'] != -1) {
+			if ($r['Movie_vote'] != -1) {
 				// reduce one vote from the event's movie list (old)
 				$data = array(
 					'Event_ID' => $r['Event_ID'],
-					'Movie_ID' => $r['Movie_ID'],
+					'Movie_ID' => $r['Movie_vote'],
 				);
 				$r2 = $this->event->reduceVote($data);
 				if ($r2 == FALSE)
