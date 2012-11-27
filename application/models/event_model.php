@@ -134,7 +134,7 @@ class Event_model extends CI_Model {
 			return FALSE;
 	}
 	
-	public function updateInviteEventVote($data) {
+	public function updateInviteEventVote($data, $Movie_vote) {
 		$this->db->update('UserInvitedEvent',array('Movie_vote'=>$Movie_vote),$data);
 
 		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
