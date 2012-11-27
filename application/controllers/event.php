@@ -173,7 +173,7 @@ class Event extends REST_Controller {
 			if ($r2 == FALSE)
 				$this->response(array('code'=>-1, 'message'=>'Fail to modify vote record'), 500);
 			else
-				$this->response(array('code'=>-1, 'message'=>'success'), 200);
+				$this->response(array('code'=>1, 'message'=>'success'), 200);
 			
 			
 		} else {
@@ -187,12 +187,45 @@ class Event extends REST_Controller {
 				if ($result_EM == FALSE) {
 					$this->response(array('code'=>-1, 'message'=>'Movie is not included in the list'), 401);
 				}
-				
+
 				// check if user is already made a vote
-					// true
+				$r = $result->first_row('array');
+				$r_EM = $result_EM->first_row('array');
+				if ($r['Movie_vote'] != -1) {
 					// reduce one vote from the event's movie list (old)
+					$data = array(
+						'Event_ID' => $r['Event_ID'],
+						'Movie_ID' => $r['Movie_vote'],
+					);
+					$r2 = $this->event->reduceVote($data);
+					if ($r2 == FALSE)
+						$this->response(array('code'=>-1, 'message'=>'Fail to remove vote'), 500);
+				}
+
 				// add one vote from the event's movie list (new)
-				// modify the entry inside the UserInvitedEvents
+
+				$data = array(
+					'Event_ID' => $r['Event_ID'],
+					'Movie_ID' => $this->input->post('Movie_ID'),
+				);
+				$r2 = $this->event->addVote($data, $r_EM['no_of_vote']+1);
+
+				if ($r2 == FALSE)
+					$this->response(array('code'=>-1, 'message'=>'Fail to add vote'), 500);
+
+				// modify the entry inside the UserOwnsEvents
+
+				$data = array(
+					'Event_ID' => $r['Event_ID'],
+					'User_ID' => $User_id,
+				);
+
+				$r2 = $this->event->updateInviteEventVote($data, $this->input->post('Movie_ID'));
+
+				if ($r2 == FALSE)
+					$this->response(array('code'=>-1, 'message'=>'Fail to modify vote record'), 500);
+				else
+					$this->response(array('code'=>1, 'message'=>'success'), 200);
 			} else {
 				$this->response(array('code'=>-1,'message'=>'You do not have permission'), 401);
 			}
