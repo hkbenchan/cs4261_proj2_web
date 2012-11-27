@@ -68,8 +68,8 @@ class Membership_model extends CI_Model {
 		$query = $this->db->select('ID')->from('Users')->where('FB_ID', $fb_id)->get();
 		
 		if ($query->num_rows() > 0) {
-			$r = $query->result();
-			return $r[0]['ID'];
+			$r = $query->first_row();
+			return $r['ID'];
 		} else {
 			return FALSE;
 		}
