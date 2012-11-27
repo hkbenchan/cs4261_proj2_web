@@ -89,7 +89,8 @@ class Event extends REST_Controller {
 				$User_id = $this->membership->user_id_by_FB(xss_clean($id));
 				if ($User_id != FALSE) {
 					$data = array(
-						
+						'User_ID' => $User_id,
+						'Event_ID' => $event_id,
 					);
 					$result = $this->event->addInviteEvent($data);
 					if ($result == TRUE)
