@@ -142,4 +142,41 @@ class Event_model extends CI_Model {
 		else
 			return FALSE;
 	}
+	
+	public function getMovieList($Event_ID) {
+		$result = $this->db->from('EventMovie')->where('Event_ID', $Event_ID)->get();
+		return $result->result_array();
+		/*
+		if ($result->num_rows()>0) {
+			return $result->result_array();
+		} else {
+			return 
+		}
+		*/
+	}
+	
+	public function removeMovieFromList($Event_ID, $Movie_vote) {
+	
+		// find if anyone voted it and set it to -1
+		
+		$this->db->update('UserOwnsEvent',array('Movie_vote'=>-1), array('Event_ID' => $Event_ID, 'Movie_vote' => $Movie_vote));
+		$this->db->update('UserInvitedEvent',array('Movie_vote'=>-1), array('Event_ID' => $Event_ID, 'Movie_vote' => $Movie_vote));
+		
+		// remove the movies from the EventMovie
+		
+		$this->db->delete('EventMovie', array('Event_ID' => $Event_ID, 'Movie_ID' => $Movie_vote));
+		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	public function addMovieFromList($Event_ID, $Movie_vote) {
+		$this->db->insert('EventMovie', array('Event_ID' => $Event_ID, 'Movie_ID' => $Movie_vote));
+		
+		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
+			return TRUE;
+		else
+			return FALSE;
+	}
 }

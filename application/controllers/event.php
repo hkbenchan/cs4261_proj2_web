@@ -234,15 +234,65 @@ class Event extends REST_Controller {
 	
 	public function edit_movie_lists_post(){
 		
+		
+		$this->load->helper(array('form','security'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('FB_ID','required|numeric');
+		$this->form_validation->set_rules('Event_ID', 'required|numeric');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
+		}
+		
+		// get the User_ID
+		$this->load->model('membership_model','membership');
+		$Event_ID = $this->input->post('Event_ID');
+		$User_id = $this->membership->user_id_by_FB($this->input->post('FB_ID'));
+		if ($User_id == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'ID not found'), 401);
+		}
+		
 		// check if event exists (own)
-			// true
+		
+		$result = $this->event->findOwnEvent($User_id, $this->input->post('Event_ID'));
+		if ($result != FALSE) {
+			$Movie_ID = $this->input->post('Movie_ID');
+			if ($Movie_ID == false) {
+				$Movie_ID = array();
+			}
+			
+			$processed = array();
+			$j = count($Movie_ID);
+			for ($i = 0; $i< $j; $i++) {
+				$processed[$i] = FALSE;
+			}
+			
 			// compare the database lists with new lists
+			foreach ($result as $id => $row) {
 				// for each movie needs to remove
-					// find if anyone voted it
-						// set it to -1
-					// remove the movies from the EventMovie
-				// for each movie needs to add
+				$tmp = array_search($row['Movie_ID'],$Movie_ID);
+				if ($tmp == FALSE) {
+					$this->event->removeMovieFromList($Event_ID, $Movie_ID);
+				} else {
+					$processed[$tmp] = TRUE;
+				}
+			}
+			
+			// for each movie needs to add
+			for ($i = 0; $i< $j; $i++) {
+				if ($processed[$i] == FALSE) {
 					// add the movies to the EventMovie
+					$add_movie = xss_clean($Movie_ID[$i]);
+					$this->event->addMovieFromList($Event_ID, $add_movie);
+				}
+			}
+			
+			$this->response(array('code'=>1, 'message'=>'List updated.'), 200);	
+				
+		} else {
+			$this->response(array('code'=>-1, 'message'=>'You do not own this event.'), 401);
+		}
 		
 	}
 	
