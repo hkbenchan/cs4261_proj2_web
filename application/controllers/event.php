@@ -89,13 +89,28 @@ class Event extends REST_Controller {
 		}
 		
 		// for each included user (FB_ID), add them to the UserInvitedEvent
-		// $invited_users = $this->input->post('invited');
-		// 		if ($invited_users == FALSE) {
-		// 			// finish
-		// 		} else {
-		// 			foreach ($invited_users)
-		// 		}
+		$invited_users = $this->input->post('invited');
+		$i = 0; $j = 0;
+		if ($invited_users == FALSE) {
+			// finish
+		} else {
+			foreach ($invited_users as $id) {
+				$User_id = FALSE;
+				$User_id = $this->membership->user_id_by_FB(xss_clean($id));
+				if ($User_id != FALSE) {
+					$data = array(
+						
+					);
+					$result = $this->event->addInviteEvent($data);
+					if ($result == TRUE)
+						$j++;
+				}
+				$i++;
+			}
+		}
 		
+		$this->response(array('code'=>1,'message'=>'created event','invite'=>$i, 'invited'=>$j),200);
+
 	}
 	
 	public function vote_movies_post(){

@@ -53,4 +53,13 @@ class Event_model extends CI_Model {
 		else
 			return FALSE;
 	}
+	
+	public function addInviteEvent($data) {
+		$this->db->insert('UserInvitedEvent', $data);
+		
+		if ($this->db->affected_rows()>0)
+			return TRUE;
+		else
+			return FALSE;
+	}
 }
