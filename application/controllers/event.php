@@ -29,17 +29,7 @@ class Event extends REST_Controller {
 	}
 	
 	public function create_post(){
-		
-		$invited_users = $this->input->post('invited');
-		if ($invited_users == FALSE) {
-			// finish
-		} else {
-			foreach ($invited_users as $id) {
-				var_dump($id);
-			}
-		}
-		die();
-		
+				
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
