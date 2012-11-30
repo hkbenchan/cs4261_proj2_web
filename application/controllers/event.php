@@ -299,6 +299,52 @@ class Event extends REST_Controller {
 	}
 	
 	public function finalize_movie_post(){
-		
+		$this->response(array(),404);
 	}
+	
+	public function get_event_get() {
+		$this->load->helper(array('form','security'));
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('FB_ID','required|numeric');
+		$this->form_validation->set_rules('Event_ID', 'required|numeric');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
+		}
+		
+		// get the User_ID
+		$this->load->model('membership_model','membership');
+		$Event_ID = $this->input->post('Event_ID');
+		$User_id = $this->membership->user_id_by_FB($this->input->post('FB_ID'));
+		if ($User_id == FALSE) {
+			$this->response(array('code'=>-1, 'message'=>'ID not found'), 401);
+		}
+		
+		// check if user is involved in this event
+		$result = $this->event->findOwnEvent($User_id, $Event_ID);
+		$pass_test = false;
+		
+		if ($result != FALSE) {
+			$pass_test = true;
+		} else {
+			// check if event exists (invited)
+			$result = $this->event->findInviteEvent($User_id, $this->input->post('Event_ID'));
+			if ($result != FALSE) {
+				$pass_test = true;
+			}
+		}
+		
+		if ($pass_test == false) {
+			$this->response(array('code'=> -1, 'message' => 'You have no connection with this event.'), 401);
+		}
+		
+		$result = $this->event->getMovieList($Event_ID);
+		if (count($result) > 0) {
+			$this->response(array('code'=> 1, 'data'=>$result), 200);
+		} else {
+			$this->response(array('code'=> -1, 'data'=>array()), 404);
+		}
+	}
+	
 }
