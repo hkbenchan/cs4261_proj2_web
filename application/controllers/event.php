@@ -316,13 +316,13 @@ class Event extends REST_Controller {
 		
 		// get the User_ID
 		$this->load->model('membership_model','membership');
-		$Event_ID = $this->input->get('Event_ID');
-		
 		
 		$User_id = $this->membership->user_id_by_FB((int)$this->input->get('FB_ID'));
 		if ($User_id == FALSE) {
 			$this->response(array('code'=>-1, 'message'=>'ID not found'), 401);
 		}
+		
+		$Event_ID = $this->input->get('Event_ID');
 		
 		// check if user is involved in this event
 		$result = $this->event->findOwnEvent($User_id, $Event_ID);
@@ -332,7 +332,7 @@ class Event extends REST_Controller {
 			$pass_test = true;
 		} else {
 			// check if event exists (invited)
-			$result = $this->event->findInviteEvent($User_id, $this->input->post('Event_ID'));
+			$result = $this->event->findInviteEvent($User_id, $Event_ID);
 			if ($result != FALSE) {
 				$pass_test = true;
 			}
