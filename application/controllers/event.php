@@ -303,13 +303,14 @@ class Event extends REST_Controller {
 	}
 	
 	public function get_event_get() {
-		$this->load->helper(array('form','security'));
-		$this->load->library('form_validation');
+		// $this->load->helper(array('form','security'));
+		// 		$this->load->library('form_validation');
+		// 		
+		// 		$this->form_validation->set_rules('FB_ID','','required|numeric');
+		// 		$this->form_validation->set_rules('Event_ID','','required|numeric');
+		// 		
 		
-		$this->form_validation->set_rules('FB_ID','','required|numeric');
-		$this->form_validation->set_rules('Event_ID','','required|numeric');
-		
-		if ($this->form_validation->run() == FALSE) {
+		if (!(is_numeric($this->input->get('FB_ID')) && (is_numeric($this->input->get('Event_ID'))) )) {
 			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
 		}
 		
