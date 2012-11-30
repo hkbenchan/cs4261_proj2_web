@@ -149,7 +149,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 		elseif ( $item == 'movie_detail')
 		{
 			
-			$result = $CI->curl->simple_get("api.rottentomatoes.com/api/public/v1.0/movies/".(int)$id.".json",
+			$result = $CI->curl->simple_get("http://api.rottentomatoes.com/api/public/v1.0/movies/".(int)$id.".json",
 			array(
 				"apikey" => $rotten_tomato_key,
 			));
