@@ -130,5 +130,20 @@ class Movie extends REST_Controller {
 		}
 	}
 	
+	public function get_movie_get() {
+		$this->load->helper('fetchinfo');
+		
+		$Movie_ID = $this->input->get('Movie_ID', true);
+		if (!is_numeric($Movie_ID)) {
+			$Movie_ID = 0;
+		}
+		$result = fetch_rotten_tomato(9,0,0,$Movie_ID);
+		if ($result == FALSE) {
+			$this->response(array('message'=>'API fail.'), 404);
+		} else {
+			$this->response($result,200)
+		}
+	}
+	
 	
 }

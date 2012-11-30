@@ -38,7 +38,7 @@
  */
 if ( ! function_exists('fetch_rotten_tomato'))
 {
-	function fetch_rotten_tomato($item = 0, $page_limit = 20, $page_no = 1)
+	function fetch_rotten_tomato($item = 0, $page_limit = 20, $page_no = 1, $id = 0)
 	{
 		$rotten_tomato_index = array(
 			0 => '',
@@ -50,7 +50,7 @@ if ( ! function_exists('fetch_rotten_tomato'))
 			6 => 'dvd_current',
 			7 => 'dvd_new',
 			8 => 'dvd_upcoming',
-			9 => '',
+			9 => 'movie_detail',
 		);
 		
 		$rotten_tomato_key = 'hzbubqr3gxev62fg8p3pwts6';
@@ -143,6 +143,14 @@ if ( ! function_exists('fetch_rotten_tomato'))
 				"page_limit" => $page_limit,
 				"page" => $page_no,
 				"country" => "us",
+				"apikey" => $rotten_tomato_key,
+			));
+		}
+		elseif ( $item == 'movie_detail')
+		{
+			
+			$result = $CI->curl->simple_get("api.rottentomatoes.com/api/public/v1.0/movies/".(int)$id.".json",
+			array(
 				"apikey" => $rotten_tomato_key,
 			));
 		}
