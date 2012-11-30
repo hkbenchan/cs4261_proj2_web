@@ -3,19 +3,25 @@
 class Event_model extends CI_Model {
 	
 	public function get_event_lists_own($FB_ID = -1) {
-		return $this->db->select('UserOwnsEvent.*')
+		$r = $this->db->select('UserOwnsEvent.*, Event.*')
 						->from('UserOwnsEvent')
 						->join('Users','Users.ID = UserOwnsEvent.User_ID')
+						->join('Event', 'Event.ID = UserOwnsEvent.Event_ID')
 						->where('Users.FB_ID',$FB_ID)
 						->get();
+						
+		return $r;
 	}
 	
 	public function get_event_lists_invited($FB_ID = -1) {
-		return $this->db->select('UserInvitedEvent.*')
+		$r = $this->db->select('UserInvitedEvent.*, Event.*')
 						->from('UserInvitedEvent')
 						->join('Users','Users.ID = UserInvitedEvent.User_ID')
+						->join('Event', 'Event.ID = UserOwnsEvent.Event_ID')
 						->where('Users.FB_ID',$FB_ID)
 						->get();
+		
+		return $r;
 	}
 	
 	public function get_event_lists_all($FB_ID = -1) {
