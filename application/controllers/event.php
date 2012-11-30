@@ -316,11 +316,10 @@ class Event extends REST_Controller {
 		
 		// get the User_ID
 		$this->load->model('membership_model','membership');
-		$Event_ID = $this->input->post('Event_ID');
+		$Event_ID = $this->input->get('Event_ID');
 		
-		echo 'FB_ID: '.$this->input->post('FB_ID');
 		
-		$User_id = $this->membership->user_id_by_FB((int)$this->input->post('FB_ID'));
+		$User_id = $this->membership->user_id_by_FB((int)$this->input->get('FB_ID'));
 		if ($User_id == FALSE) {
 			$this->response(array('code'=>-1, 'message'=>'ID not found'), 401);
 		}
