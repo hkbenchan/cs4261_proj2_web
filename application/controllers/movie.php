@@ -141,7 +141,7 @@ class Movie extends REST_Controller {
 		if ($result == FALSE) {
 			$this->response(array('message'=>'API fail.'), 404);
 		} else {
-			$this->response($result,200)
+			$this->response($result,200);
 		}
 	}
 	
