@@ -179,4 +179,10 @@ class Event_model extends CI_Model {
 		else
 			return FALSE;
 	}
+	
+	public function getEventDetail($Event_ID) {
+		$result = $this->db->from('Event')->where('ID', $Event_ID)->get();
+		
+		return $result->result_array();
+	}
 }

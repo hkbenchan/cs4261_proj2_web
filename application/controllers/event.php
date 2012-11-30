@@ -342,9 +342,10 @@ class Event extends REST_Controller {
 			$this->response(array('code'=> -1, 'message' => 'You have no connection with this event.'), 401);
 		}
 		
-		$result = $this->event->getMovieList($Event_ID);
-		if (count($result) > 0) {
-			$this->response(array('code'=> 1, 'data'=>$result), 200);
+		$result_event = $this->event->getEventDetail($Event_ID);
+		$result_movie = $this->event->getMovieList($Event_ID);
+		if ((count($result_movie) > 0) && (count($result_event) > 0) {
+			$this->response(array('code'=> 1, 'event'=>$result_event, 'data'=>$result), 200);
 		} else {
 			$this->response(array('code'=> -1, 'data'=>array()), 404);
 		}
