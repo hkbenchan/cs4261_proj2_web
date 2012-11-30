@@ -17,7 +17,7 @@ class Event_model extends CI_Model {
 		$r = $this->db->select('UserInvitedEvent.*, Event.*')
 						->from('UserInvitedEvent')
 						->join('Users','Users.ID = UserInvitedEvent.User_ID')
-						->join('Event', 'Event.ID = UserOwnsEvent.Event_ID')
+						->join('Event', 'Event.ID = UserInvitedEvent.Event_ID')
 						->where('Users.FB_ID',$FB_ID)
 						->get();
 		
