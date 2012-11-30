@@ -33,10 +33,10 @@ class Event extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FB_ID','required|numeric');
-		$this->form_validation->set_rules('Title','required|min_length[1]|max_length[255]|xss_clean');
-		$this->form_validation->set_rules('Description','xss_clean');
-		$this->form_validation->set_rules('Date','required|xss_clean');
+		$this->form_validation->set_rules('FB_ID','','required|numeric');
+		$this->form_validation->set_rules('Title','','required|min_length[1]|max_length[255]|xss_clean');
+		$this->form_validation->set_rules('Description','','xss_clean');
+		$this->form_validation->set_rules('Date','','required|xss_clean');
 		//$this->form_validation->set_rules('');
 		$User_id = FALSE;
 		
@@ -109,9 +109,9 @@ class Event extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FB_ID','required|numeric');
-		$this->form_validation->set_rules('Event_ID', 'required|numeric');
-		$this->form_validation->set_rules('Movie_ID', 'required|numeric');
+		$this->form_validation->set_rules('FB_ID','','required|numeric');
+		$this->form_validation->set_rules('Event_ID','', 'required|numeric');
+		$this->form_validation->set_rules('Movie_ID','', 'required|numeric');
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
@@ -238,8 +238,8 @@ class Event extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FB_ID','required|numeric');
-		$this->form_validation->set_rules('Event_ID', 'required|numeric');
+		$this->form_validation->set_rules('FB_ID','','required|numeric');
+		$this->form_validation->set_rules('Event_ID','','required|numeric');
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
@@ -306,8 +306,8 @@ class Event extends REST_Controller {
 		$this->load->helper(array('form','security'));
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FB_ID','required|numeric');
-		$this->form_validation->set_rules('Event_ID', 'required|numeric');
+		$this->form_validation->set_rules('FB_ID','','required|numeric');
+		$this->form_validation->set_rules('Event_ID','','required|numeric');
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->response(array('code'=>-1, 'message'=>'Please check your input again.'), 404);
