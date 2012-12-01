@@ -141,6 +141,11 @@ class Event extends REST_Controller {
 			$r_EM = $result_EM->first_row('array');
 			if ($r['Movie_vote'] != -1) {
 				// reduce one vote from the event's movie list (old)
+				
+				if ($r['Movie_vote'] == $this->input->post('Event_ID')) {
+					$this->response(array('code'=>-1, 'message'=>'You cannot vote the same movie again!'), 401);
+				}
+				
 				$data = array(
 					'Event_ID' => $r['Event_ID'],
 					'Movie_ID' => $r['Movie_vote'],
