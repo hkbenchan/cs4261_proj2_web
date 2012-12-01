@@ -51,8 +51,6 @@ class Register extends REST_Controller {
 				);
 			}
 			
-			error_log(print_r($data, true),0);
-			
 			$q = $this->membership->register($data);
 			
 			if ($q['code'] > 0) {
