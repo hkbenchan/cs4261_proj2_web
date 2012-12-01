@@ -173,7 +173,7 @@ class Event extends REST_Controller {
 			if ($r2 == FALSE)
 				$this->response(array('code'=>-1, 'message'=>'Fail to modify vote record'), 500);
 			else
-				$this->response(array('code'=>1, 'message'=>'success'), 200);
+				$this->response(array('code'=>1, 'message'=>'success', 'no_of_vote' => $r2['no_of_vote']), 200);
 			
 			
 		} else {
@@ -225,7 +225,7 @@ class Event extends REST_Controller {
 				if ($r2 == FALSE)
 					$this->response(array('code'=>-1, 'message'=>'Fail to modify vote record'), 500);
 				else
-					$this->response(array('code'=>1, 'message'=>'success'), 200);
+					$this->response(array('code'=>1, 'message'=>'success','no_of_vote' => $r2['no_of_vote']), 200);
 			} else {
 				$this->response(array('code'=>-1,'message'=>'You do not have permission'), 401);
 			}

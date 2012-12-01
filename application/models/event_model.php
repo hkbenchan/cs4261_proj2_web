@@ -134,17 +134,24 @@ class Event_model extends CI_Model {
 	public function updateOwnEventVote($data, $Movie_vote) {
 		$this->db->update('UserOwnsEvent',array('Movie_vote'=>$Movie_vote),$data);
 
-		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
-			return TRUE;
-		else
+		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2) {
+			$t = $this->findEventMovie($data['Event_ID'], $Movie_vote);
+			if ($t != FALSE)
+				return $t->first_row('array');
+			else return FALSE;
+		} else
 			return FALSE;
 	}
 	
 	public function updateInviteEventVote($data, $Movie_vote) {
 		$this->db->update('UserInvitedEvent',array('Movie_vote'=>$Movie_vote),$data);
 
-		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2)
-			return TRUE;
+		if ($this->db->affected_rows()>0 && $this->db->affected_rows()<2) {
+			$t = $this->findEventMovie($data['Event_ID'], $Movie_vote);
+			if ($t != FALSE)
+				return $t->first_row('array');
+			else return FALSE;
+		}
 		else
 			return FALSE;
 	}
