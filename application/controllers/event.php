@@ -142,7 +142,7 @@ class Event extends REST_Controller {
 			if ($r['Movie_vote'] != -1) {
 				// reduce one vote from the event's movie list (old)
 				
-				if ($r['Movie_vote'] == $this->input->post('Event_ID')) {
+				if ($r['Movie_vote'] == $this->input->post('Movie_ID')) {
 					$this->response(array('code'=>-1, 'message'=>'You cannot vote the same movie again!'), 401);
 				}
 				
