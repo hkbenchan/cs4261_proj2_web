@@ -8,6 +8,7 @@ class Event_model extends CI_Model {
 						->join('Users','Users.ID = UserOwnsEvent.User_ID')
 						->join('Event', 'Event.ID = UserOwnsEvent.Event_ID')
 						->where('Users.FB_ID',$FB_ID)
+						->where('Event.Date > CURRENT_TIMESTAMP')
 						->get();
 						
 		return $r;
@@ -19,6 +20,7 @@ class Event_model extends CI_Model {
 						->join('Users','Users.ID = UserInvitedEvent.User_ID')
 						->join('Event', 'Event.ID = UserInvitedEvent.Event_ID')
 						->where('Users.FB_ID',$FB_ID)
+						->where('Event.Date > CURRENT_TIMESTAMP')
 						->get();
 		
 		return $r;
