@@ -31,6 +31,7 @@ class Register extends REST_Controller {
 		$this->form_validation->set_rules('Email','','required|valid_email');
 		$this->form_validation->set_rules('FB_auth','','required|min_length[1]|max_length[1]|xss_clean');
 		
+		
 		if ($this->form_validation->run() === FALSE) {
 			$this->response(array('message'=>'Please check the input again.'), 404);
 		} else {
@@ -49,6 +50,9 @@ class Register extends REST_Controller {
 					'Email' => xss_clean($_POST['Email']),
 				);
 			}
+			
+			error_log(print_r($data, true),0);
+			
 			$q = $this->membership->register($data);
 			
 			if ($q['code'] > 0) {
